@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='sonm',
-    version='0.0.1',
+    version='0.0.2',
     description='Wrapper for SONM API https://github.com/sonm-io',
     author='Telminov Sergey',
     author_email='sergey@telminov.ru',
@@ -11,4 +11,7 @@ setup(
     include_package_data=True,
     packages=find_packages(),
     license='The MIT License',
+    install_requires=[
+        'jinja2',
+    ]
 )

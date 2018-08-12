@@ -1,0 +1,83 @@
+duration: {{ bid.duration }}
+price: {{ bid.price }}
+identity: {{ bid.identity }}
+
+{%- if bid.counterparty %}
+counterparty: {{ bid.counterparty }}
+{%- endif %}
+
+{%- if bid.blacklist %}
+blacklist: {{ bid.blacklist }}
+{% endif %}
+
+{%- if bid.tag %}
+tag: {{ bid.tag }}
+{% endif %}
+
+resources:
+    {%- if bid.network %}
+    network:
+        {%- if bid.network.overlay != None %}
+            overlay: {{ bid.network.overlay }}
+        {%- endif %}
+
+        {%- if bid.network.outbound != None %}
+            outbound: {{ bid.network.outbound }}
+        {%- endif %}
+
+        {%- if bid.network.incoming != None %}
+            incoming: {{ bid.network.incoming }}
+        {%- endif %}
+    {%- endif %}
+
+    {%- if bid.benchmarks %}
+    benchmarks:
+        {%- if bid.benchmarks.cpu_cores != None %}
+            cpu-cores: {{ bid.benchmarks.cpu_cores }}
+        {%- endif %}
+
+        {%- if bid.benchmarks.cpu_sysbench_one != None %}
+            cpu-sysbench-one: {{ bid.benchmarks.cpu_sysbench_one }}
+        {%- endif %}
+
+        {%- if bid.benchmarks.cpu_sysbench_multi != None %}
+            cpu-sysbench-multi: {{ bid.benchmarks.cpu_sysbench_multi }}
+        {%- endif %}
+
+        {%- if bid.benchmarks.ram_size != None %}
+            ram-size: {{ bid.benchmarks.ram_size }}
+        {%- endif %}
+
+        {%- if bid.benchmarks.storage_size != None %}
+            storage-size: {{ bid.benchmarks.storage_size }}
+        {%- endif %}
+
+        {%- if bid.benchmarks.net_download != None %}
+            net-download: {{ bid.benchmarks.net_download }}
+        {%- endif %}
+
+        {%- if bid.benchmarks.net_upload != None %}
+            net-upload: {{ bid.benchmarks.net_upload }}
+        {%- endif %}
+
+        {%- if bid.benchmarks.gpu_count != None %}
+            gpu-count: {{ bid.benchmarks.gpu_count }}
+        {%- endif %}
+
+        {%- if bid.benchmarks.gpu_mem != None %}
+            gpu-mem: {{ bid.benchmarks.gpu_mem }}
+        {%- endif %}
+
+        {%- if bid.benchmarks.gpu_eth_hashrate != None %}
+            gpu-eth-hashrate: {{ bid.benchmarks.gpu_eth_hashrate }}
+        {%- endif %}
+
+        {%- if bid.benchmarks.gpu_cash_hashrate != None %}
+            gpu-cash-hashrate: {{ bid.benchmarks.gpu_cash_hashrate }}
+        {%- endif %}
+
+        {%- if bid.benchmarks.gpu_redshift != None %}
+            gpu-redshift: {{ bid.benchmarks.gpu_redshift }}
+        {%- endif %}
+
+    {%- endif %}
