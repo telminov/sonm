@@ -9,8 +9,9 @@ class SonmException(Exception):
 class CliMixin:
     cli_path = '/usr/bin/sonmcli'
 
-    def _call_command(self, command_args: list) -> dict:
+    def _call_command(self, command_args: list, parse_json=True):
         command = [self.cli_path, *command_args]
+        command.extend(['--out', 'json'])
 
         proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         return_code = proc.wait()
@@ -23,4 +24,8 @@ class CliMixin:
                 )
             )
 
-        return json.loads(out.decode())
+        result = out.decode()
+        if parse_json:
+            result = json.loads(result)
+
+        return result
