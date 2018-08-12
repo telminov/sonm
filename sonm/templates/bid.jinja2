@@ -36,8 +36,8 @@ resources:
             cpu-cores: {{ bid.benchmarks.cpu_cores }}
         {%- endif %}
 
-        {%- if bid.benchmarks.cpu_sysbench_one != None %}
-            cpu-sysbench-one: {{ bid.benchmarks.cpu_sysbench_one }}
+        {%- if bid.benchmarks.cpu_sysbench_single != None %}
+            cpu-sysbench-single: {{ bid.benchmarks.cpu_sysbench_single }}
         {%- endif %}
 
         {%- if bid.benchmarks.cpu_sysbench_multi != None %}

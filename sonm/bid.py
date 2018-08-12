@@ -1,6 +1,7 @@
 # https://docs.sonm.com/concepts/main-entities/order
 from jinja2 import Template
 import os
+import tempfile
 
 
 class Bid:
@@ -34,13 +35,18 @@ class Bid:
 
         return yaml
 
-    def save_yaml(self, yaml_path):
+    def save_yaml(self, yaml_path: str = None):
         """
         :param yaml_path: bid.yaml result path
         """
+        if not yaml_path:
+            _, yaml_path = tempfile.mkstemp(prefix='bid_', suffix='.yaml')
+
         yaml = self.get_yaml()
         with open(yaml_path, 'w') as f:
             f.write(yaml)
+
+        return yaml_path
 
 
 class Network:
@@ -54,7 +60,7 @@ class Network:
 
 
 class Benchmarks:
-    def __init__(self, cpu_cores: float = None, cpu_sysbench_one: int = None, cpu_sysbench_multi: int = None,
+    def __init__(self, cpu_cores: float = None, cpu_sysbench_single: int = None, cpu_sysbench_multi: int = None,
                  ram_size: int = None, storage_size: int = None, net_download: int = None, net_upload: int = None,
                  gpu_count: int = None, gpu_mem: int = None, gpu_eth_hashrate: int = None,
                  gpu_cash_hashrate: int = None, gpu_redshift: int = None):
@@ -62,7 +68,7 @@ class Benchmarks:
         Benchmarks resources parameters
         """
         self.cpu_cores = cpu_cores
-        self.cpu_sysbench_one = cpu_sysbench_one
+        self.cpu_sysbench_single = cpu_sysbench_single
         self.cpu_sysbench_multi = cpu_sysbench_multi
         self.ram_size = ram_size
         self.storage_size = storage_size
