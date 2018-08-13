@@ -1,14 +1,15 @@
-# docker image settings, required section
 container:
-  # Image name to start on worker, required param.
-  image: {{ task.image }}
-  # Env variables that will be passed to container on start.
-  env:
-    param1: value1
-    param2: value2
-    param3: value3
-  # Add ability to pull container back.
-  commit_on_stop: true
+    image: {{ task.image }}
+
+    {%- if task.env %}
+    env:
+        {% for name, value in task.env.items() %}
+            {{ name }}: {{ value }}
+        {% endfor %}
+    {% endif %}
+
+    commit_on_stop: {{ task.commit_on_stop }}
+
 #  networks:
 #    - type: tinc
 #      subnet: "10.20.30.0/24"

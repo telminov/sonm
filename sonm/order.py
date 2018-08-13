@@ -19,12 +19,12 @@ class Order(CliMixin):
         command_args = ['order', 'list']
         return self._call_command(command_args)
 
-    def status(self, order_id: int) -> dict:
-        command_args = ['order', 'status', str(order_id)]
+    def status(self, order_id: str) -> dict:
+        command_args = ['order', 'status', order_id]
         return self._call_command(command_args)
 
-    def cancel(self, order_id: int) -> dict:
-        command_args = ['order', 'cancel', str(order_id)]
+    def cancel(self, order_id: str) -> dict:
+        command_args = ['order', 'cancel', order_id]
         return self._call_command(command_args)
 
     def purge(self) -> dict:

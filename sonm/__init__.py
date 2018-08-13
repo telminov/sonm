@@ -11,7 +11,8 @@ class CliMixin:
 
     def _call_command(self, command_args: list, parse_json=True):
         command = [self.cli_path, *command_args]
-        command.extend(['--out', 'json'])
+        if parse_json:
+            command.extend(['--out', 'json'])
 
         proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         return_code = proc.wait()
