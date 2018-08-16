@@ -1,0 +1,5 @@
+IDENTITY_ANONYMOUS = 'anonymous'
+IDENTITY_REGISTERED = 'registered'
+IDENTITY_IDENTIFIED = 'identified'
+IDENTITY_PROFESSIONAL = 'professional'
+

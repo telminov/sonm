@@ -4,10 +4,10 @@ import os
 import tempfile
 
 
-class Bid:
+class BidParams:
     def __init__(self, duration: int = 0, price: str = '0 USD/h', counterparty: str = None, blacklist: str = None,
                  identity: str = 'anonymous', tag: str = None,
-                 network: 'Network' = None, benchmarks: 'Benchmarks' = None):
+                 network: 'NetworkParams' = None, benchmarks: 'Benchmarks' = None):
         """
         BID order parameters
         """
@@ -49,7 +49,7 @@ class Bid:
         return yaml_path
 
 
-class Network:
+class NetworkParams:
     def __init__(self, overlay: bool = None, outbound: bool = None, incoming: bool = None):
         """
         Network resources parameters

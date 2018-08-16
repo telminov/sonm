@@ -2,12 +2,12 @@
 import os
 
 from . import CliMixin
-from .bid import Bid
+from .bid import BidParams
 
 
 class Order(CliMixin):
 
-    def create(self, bid: Bid) -> dict:
+    def create(self, bid: BidParams) -> dict:
         yaml_path = bid.save_yaml()
         try:
             command_args = ['order', 'create', yaml_path]
