@@ -1,19 +1,26 @@
 # https://docs.sonm.com/guides/sonm-cli-guide#task
-from jinja2 import Template
 import os
+import json
 import tempfile
+from typing import Optional
+
+from jinja2 import Template
 
 from . import CliMixin
 
 
 class Task(CliMixin):
 
-    def list(self, deal_id: str) -> dict:
+    def list(self, deal_id: str) -> Optional[dict]:
         command_args = ['task', 'list', deal_id]
+
+        # As I can see, it is bug in sonmcli:
+        # output of command "sonmcli task list 1234 --out json" is not valid json
         results = self._call_command(command_args, parse_json=False)
-        # TODO
-        results = []
-        return results
+
+        # skip first line "Deal 3927 (1/1):", parse second line
+        tasks = json.loads(results.split('\n')[1])
+        return tasks
 
     def start(self, deal_id: str, params: 'TaskParams') -> dict:
         yaml_path = self._save_yaml(params)
@@ -29,7 +36,7 @@ class Task(CliMixin):
 
     def logs(self, deal_id: str, task_id: str) -> dict:
         command_args = ['task', 'logs', deal_id, task_id]
-        result = self._call_command(command_args, parse_json=False)
+        result = self._call_command(command_args, output_format=None)
         return {
             'logs': result.split('\n')
         }
