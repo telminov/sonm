@@ -8,6 +8,13 @@ container:
         {% endfor %}
     {% endif %}
 
+    {%- if task.expose %}
+    expose:
+        {% for src, dist in task.expose %}
+            - {{ src }}: {{ dist }}
+        {% endfor %}
+    {% endif %}
+
     commit_on_stop: {{ task.commit_on_stop }}
 
 #  networks:
