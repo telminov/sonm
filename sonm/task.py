@@ -1,6 +1,5 @@
 # https://docs.sonm.com/guides/sonm-cli-guide#task
 import os
-import json
 import tempfile
 from typing import Optional
 
@@ -13,22 +12,14 @@ class Task(CliMixin):
 
     def list(self, deal_id: str) -> Optional[dict]:
         command_args = ['task', 'list', deal_id]
-
-        # As I can see, it is bug in sonmcli:
-        # output of command "sonmcli task list 1234 --out json" is not valid json
-        results = self._call_command(command_args, parse_json=False)
-
-        # skip first line "Deal 3927 (1/1):", parse second line
-        tasks = json.loads(results.split('\n')[1])
-        return tasks
+        return self._call_command(command_args)
 
     def start(self, deal_id: str, params: 'TaskParams') -> dict:
         yaml_path = self._save_yaml(params)
-        try:
-            command_args = ['task', 'start', deal_id, yaml_path]
-            return self._call_command(command_args)
-        finally:
-            os.unlink(yaml_path)
+        command_args = ['task', 'start', deal_id, yaml_path]
+        result = self._call_command(command_args)
+        os.unlink(yaml_path)
+        return result
 
     def status(self, deal_id: str, task_id: str) -> dict:
         command_args = ['task', 'status', deal_id, task_id]

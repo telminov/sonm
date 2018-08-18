@@ -11,7 +11,7 @@ container:
     {%- if task.expose %}
     expose:
         {% for src, dist in task.expose %}
-            - {{ src }}: {{ dist }}
+            - {{ src }}:{{ dist }}
         {% endfor %}
     {% endif %}
 
