@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='sonm',
-    version='0.0.4',
+    version='0.0.5',
     description='Wrapper for SONM API https://github.com/sonm-io',
     author='Telminov Sergey',
     author_email='sergey@telminov.ru',

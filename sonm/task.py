@@ -55,12 +55,12 @@ class Task(CliMixin):
 
 class TaskParams:
 
-    def __init__(self, image: str, evn: dict = None, commit_on_stop: bool = False, expose: list = None):
+    def __init__(self, image: str, env: dict = None, commit_on_stop: bool = False, expose: list = None):
         """
         https://docs.sonm.com/guides/sonm-cli-guide#task_start
         :type expose: tuple of tuples with tow strings: source port and destination port for exposing
         """
         self.image = image
-        self.evn = evn
+        self.env = env
         self.commit_on_stop = commit_on_stop
         self.expose = expose
