@@ -1,7 +1,7 @@
 # https://docs.sonm.com/guides/sonm-cli-guide#task
 import os
 import tempfile
-from typing import Optional
+from typing import Optional, List
 
 from jinja2 import Template
 
@@ -55,7 +55,8 @@ class Task(CliMixin):
 
 class TaskParams:
 
-    def __init__(self, image: str, env: dict = None, commit_on_stop: bool = False, expose: list = None):
+    def __init__(self, image: str, env: dict = None, commit_on_stop: bool = False, expose: list = None,
+                 networks: List['Network'] = None):
         """
         https://docs.sonm.com/guides/sonm-cli-guide#task_start
         :type expose: tuple of tuples with tow strings: source port and destination port for exposing
@@ -64,3 +65,15 @@ class TaskParams:
         self.env = env
         self.commit_on_stop = commit_on_stop
         self.expose = expose
+        self.networks = networks
+
+
+class Network:
+    pass
+
+
+class NetworkTinc(Network):
+    def __init__(self, subnet: str, invitation: str):
+        self.type = 'tinc'
+        self.subnet = subnet
+        self.invitation = invitation
